@@ -1,0 +1,86 @@
+from PIL import Image
+import numpy
+
+
+# 列分割
+
+
+def AcrCut(img):
+    li = list(numpy.sum(numpy.array(img) == 0, axis=0))  # 对每一列进行求和并返回一行元素
+    k = 0
+
+    posx = []
+    width, height = img.size
+    for i in range(len(li)):
+        if i > 0 and li[i] >= 5 and li[i - 1] < 5:
+            posx.append(i)
+            k = k + 1
+        if i > 0 and li[i - 1] >= 5 and li[i] < 5:
+            posx.append(i)
+            k = k + 1
+
+    if len(posx) % 2 == 1:  # 没用的一句话
+        posx.append(width)
+    lis = []
+    try:
+        for i in range(len(posx)):  # 遍历寻找起始与结束点，数量不确定，所以用数组遍历
+            if i % 2 == 0:
+                lis.append(img.crop([posx[i], 0, posx[i + 1], height]))
+
+        return lis
+
+    except:
+
+        print("Error in AcrCut")
+
+
+def HorCutCheck(i,prei):
+    return i>prei+20  # 忽略相邻三个像素的点内有分割线
+
+
+# 行分割
+# yuzhi 为行和大于该值时不可分割
+def HorCut(img, yuzhi=40):
+    width, height = img.size
+    img_array = numpy.array(img)  # 将img转数组
+
+    li = list(numpy.sum(img_array == 0, axis=1))  # 将其转换为array并求和
+    k = 0
+    posy = []
+    for i in range(len(li)):
+        if li[i] <= yuzhi:
+            if k > 0 and HorCutCheck(i,posy[k-1]):
+                img_array[i] = numpy.zeros(width, dtype=bool)  # 全部赋值为1
+
+            posy.append(i)
+            k = k + 1
+
+    # return list(numpy.sum(img_array==0, axis=1))
+    img_array = numpy.uint8(img_array)  # 转类型
+    img_array[img_array > 0] = 255  # 将1转为255
+    return Image.fromarray(img_array)
+
+
+# 图像二值化
+def binarize(img, threshold=100):
+    img = img.convert('L')
+
+    table = []
+    for i in range(256):
+        if i > threshold:
+            table.append(1)
+        else:
+            table.append(0)
+    bin_img = img.point(table, '1')  # 根据table表进行区分
+
+    return bin_img  # 二值化数组为 0 255，并不是0，1
+
+
+img = Image.open("image/test(1).jpg")
+# img.rotate(270,expand=True).save("image/test6_rotate.jpg") # 顺时针旋转270度
+# img.show()
+# print(img.size)
+re_img = binarize(img)
+# re_img.show()
+# print(HorCut(re_img).show())
+HorCut(re_img).show()
