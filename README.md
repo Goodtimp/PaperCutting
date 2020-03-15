@@ -12,14 +12,14 @@
 
 二值化后：
 
-![image-20200315212114514](C:\Users\87963\AppData\Roaming\Typora\typora-user-images\image-20200315212114514.png)
+![image-20200315212114514](http://goodtimp.com/static/upload/git/image-20200315212114514.png)
 
 行切后：
 
-![image-20200315211921922](C:\Users\87963\AppData\Roaming\Typora\typora-user-images\image-20200315211921922.png)
+![image-20200315211921922](http://goodtimp.com/static/upload/git/image-20200315211921922.png)
 
 行距分割：
 
-![image-20200315212151275](C:\Users\87963\AppData\Roaming\Typora\typora-user-images\image-20200315212151275.png)
+![image-20200315212151275](http://goodtimp.com/static/upload/git/image-20200315212151275.png)
 
 ps：有其他的一些功能忘记怎么用了，利用百度的文字识别OCR还完成了整张试卷的题目切割。
