@@ -8,7 +8,7 @@
 
 原图：
 
-![image-20200315212053736](C:\Users\87963\AppData\Roaming\Typora\typora-user-images\image-20200315212053736.png)
+![image-20200315212053736](http://goodtimp.com/static/upload/git/image-20200315212053736.png)
 
 二值化后：
 
